@@ -1,0 +1,55 @@
+{
+  "name": "minimal-react-template",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
+    "web-vitals": "^1.1.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "test:coverage": "CI=true npm test -- --env=jsdom --coverage",
+    "eject": "react-scripts eject",
+    "format": "prettier --write './**/*.{js,md,ts,tsx,jsx}'",
+    "lint": "eslint --cache --fix --ext './**/*.{js,ts,tsx,jsx}' --format=pretty ./",
+    "prepare": "husky install"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "typescript": "^4.5.2",
+    "@testing-library/jest-dom": "^5.15.1",
+    "@testing-library/user-event": "^12.8.3",
+    "@types/node": "^12.20.37",
+    "@types/react": "^17.0.37",
+    "@types/react-dom": "^17.0.11",
+    "@testing-library/react": "^12.1.2",
+    "@types/jest": "^27.0.3",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-pretty": "^2.1.1",
+    "eslint-formatter-pretty": "^4.1.0",
+    "eslint-plugin-jest-dom": "^3.9.2",
+    "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.2",
+    "prettier": "2.5.0"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx,jsx}": "eslint --cache --fix --format=pretty ./"
+  }
+}
