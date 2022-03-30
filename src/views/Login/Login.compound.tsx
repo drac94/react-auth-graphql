@@ -35,6 +35,7 @@ const LoginCompound = (): JSX.Element => {
       signIn(user, token);
       navigate('/', { replace: true });
     },
+    onError: () => {},
   });
   const handleLogin = (email: string, password: string) => {
     login({ variables: { email, password } });

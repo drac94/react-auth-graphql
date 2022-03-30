@@ -6,7 +6,7 @@ import browserHistory from './browserHistory';
 import { AUTH } from './constants';
 
 const httpLink = createHttpLink({
-  uri: 'your_api_uri_here',
+  uri: 'http://localhost:5000',
 });
 
 const authLink = setContext((_, { headers }) => {

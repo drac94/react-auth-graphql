@@ -11,6 +11,11 @@ import reportWebVitals from './reportWebVitals';
 import UserContextProvider from './userContext';
 import App from './views/App';
 
+if (process.env.NODE_ENV === 'development') {
+  const { worker } = require('./mocks/browser');
+  worker.start();
+}
+
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
