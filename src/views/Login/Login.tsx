@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { ApolloError } from '@apollo/client';
-
 type FormElements = {
   emailInput: HTMLInputElement;
   passwordInput: HTMLInputElement;
@@ -12,7 +10,7 @@ type LoginFormElement = {
 } & HTMLFormElement;
 
 type Props = {
-  error?: ApolloError;
+  error?: string;
   loading: boolean;
   onLogin: (email: string, password: string) => void;
 };
@@ -38,7 +36,7 @@ const Login = ({ error, loading, onLogin }: Props): JSX.Element => {
           <input id="passwordInput" type="password" required />
           <button type="submit">Log in</button>
         </form>
-        {error && <p>{error.message}</p>}
+        {error && <p>{error}</p>}
       </div>
     </div>
   );

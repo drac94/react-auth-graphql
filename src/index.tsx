@@ -1,8 +1,7 @@
 import React from 'react';
 
 import { ApolloProvider } from '@apollo/client';
-// @ts-ignore
-import Userfront from '@userfront/react';
+import Userfront from '@userfront/core';
 import ReactDOM from 'react-dom';
 import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
 
@@ -10,7 +9,6 @@ import './index.css';
 import { client } from './apolloConfig';
 import browserHistory from './browserHistory';
 import reportWebVitals from './reportWebVitals';
-import UserContextProvider from './userContext';
 import App from './views/App';
 
 if (process.env.NODE_ENV === 'development') {
@@ -18,15 +16,13 @@ if (process.env.NODE_ENV === 'development') {
   worker.start();
 }
 
-Userfront.init(process.env.REACT_APP_USERFRONT_TENANT_ID);
+Userfront.init(process.env.REACT_APP_USERFRONT_TENANT_ID || '');
 
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
       <HistoryRouter history={browserHistory}>
-        <UserContextProvider>
-          <App />
-        </UserContextProvider>
+        <App />
       </HistoryRouter>
     </ApolloProvider>
   </React.StrictMode>,

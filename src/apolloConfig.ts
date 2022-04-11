@@ -1,8 +1,7 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
-// @ts-ignore
-import Userfront from '@userfront/react';
+import Userfront from '@userfront/core';
 
 import browserHistory from './browserHistory';
 

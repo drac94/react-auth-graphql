@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-// @ts-ignore
-import Userfront from '@userfront/react';
+import Userfront from '@userfront/core';
 
-const LoginForm = Userfront.build({
-  toolId: 'adnmol',
-});
+import Login from './Login';
 
 const LoginCompound = (): JSX.Element => {
-  return <LoginForm />;
+  const [loginError, setLoginError] = useState<string>('');
+  const handleOnLogin = (user: string, password: string) => {
+    Userfront.login({
+      method: 'password',
+      emailOrUsername: user,
+      password: password,
+    }).catch((error) => {
+      setLoginError(error.message);
+    });
+  };
+  return <Login onLogin={handleOnLogin} loading={false} error={loginError} />;
 };
 
 export default LoginCompound;

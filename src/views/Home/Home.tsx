@@ -1,8 +1,7 @@
 import React from 'react';
 
 import { useLazyQuery } from '@apollo/client';
-// @ts-ignore
-import Userfront from '@userfront/react';
+import Userfront from '@userfront/core';
 
 import { QUERY } from './Home.query';
 
@@ -21,6 +20,13 @@ const Home = (): JSX.Element => {
     return <div>Error</div>;
   }
 
+  const handleOnLogoutClickButton = (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    e.preventDefault();
+    Userfront.logout({});
+  };
+
   return (
     <div>
       <header>
@@ -31,7 +37,7 @@ const Home = (): JSX.Element => {
         data.getTodos &&
         data.getTodos.map((todo) => <span key={todo.id}>{todo.title}</span>)}
       <button onClick={() => getTodos()}>Make API call</button>
-      <button onClick={Userfront.logout}>Logout</button>
+      <button onClick={handleOnLogoutClickButton}>Logout</button>
     </div>
   );
 };

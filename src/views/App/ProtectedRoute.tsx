@@ -1,7 +1,6 @@
 import React from 'react';
 
-// @ts-ignore
-import Userfront from '@userfront/react';
+import Userfront from '@userfront/core';
 import { Navigate, useLocation } from 'react-router-dom';
 
 type Props = {
