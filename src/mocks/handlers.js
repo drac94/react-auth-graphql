@@ -1,64 +1,51 @@
 import jwt from 'jsonwebtoken';
 import { graphql } from 'msw';
 
-const api = graphql.link('http://localhost:5000');
+const api = graphql.link('https://api.mysite.com');
 
-const JwtSecret = 'jkdhflkjhsd';
-const JwtLifeTime = '20m';
+const PK = process.env.REACT_APP_USERFRONT_PUBLIC_KEY;
 
-const createToken = (userId) =>
+const getDecodedToken = (token) =>
   new Promise((resolve, reject) => {
-    jwt.sign(
-      {
-        userId,
-      },
-      JwtSecret,
-      {
-        expiresIn: JwtLifeTime,
-      },
-      (error, token) => {
-        if (error) {
-          reject(error);
-        }
-
-        resolve(token);
+    jwt.verify(token, PK, (error, decoded) => {
+      if (error) {
+        reject(error);
       }
-    );
+
+      resolve(decoded);
+    });
   });
 
 export const handlers = [
-  api.mutation('Login', async (req, res, ctx) => {
-    const { email, password } = req.variables;
-
-    if (email !== 'john.doe@gmail.com' || password !== '123456') {
+  api.query('GetTodos', async (req, res, ctx) => {
+    const authHeader = req.headers._headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+    if (!token) {
+      // 401
       return res(
         ctx.errors([
           {
-            message: 'The username and/or password you entered is incorrect.',
+            message: 'No access (401).',
           },
         ])
       );
     }
-
-    const userId = '623e4902515ee8bdb4553599';
-
-    const token = await createToken(userId);
-
-    console.log(token);
-
-    return res(
-      ctx.data({
-        login: {
-          user: {
-            __typename: 'User',
-            id: userId,
-            email,
-            firstName: 'John',
-            lastName: 'Doe',
+    // Verify the token using the Userfront public key
+    try {
+      await getDecodedToken(token);
+      return res(
+        ctx.data({
+          getTodos: [{ id: '1', title: 'hello world' }],
+        })
+      );
+    } catch (error) {
+      return res(
+        ctx.errors([
+          {
+            message: 'No access (403).',
           },
-          token,
-        },
-      })
-    );
+        ])
+      );
+    }
   }),
 ];

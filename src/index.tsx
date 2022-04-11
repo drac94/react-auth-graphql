@@ -1,6 +1,8 @@
 import React from 'react';
 
 import { ApolloProvider } from '@apollo/client';
+// @ts-ignore
+import Userfront from '@userfront/react';
 import ReactDOM from 'react-dom';
 import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
 
@@ -15,6 +17,8 @@ if (process.env.NODE_ENV === 'development') {
   const { worker } = require('./mocks/browser');
   worker.start();
 }
+
+Userfront.init(process.env.REACT_APP_USERFRONT_TENANT_ID);
 
 ReactDOM.render(
   <React.StrictMode>

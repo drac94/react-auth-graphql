@@ -1,8 +1,8 @@
 import React from 'react';
 
+// @ts-ignore
+import Userfront from '@userfront/react';
 import { Navigate, useLocation } from 'react-router-dom';
-
-import { isAuthenticated } from '../../auth';
 
 type Props = {
   children: JSX.Element;
@@ -10,10 +10,10 @@ type Props = {
 
 const ProtectedRoute = ({ children }: Props): JSX.Element => {
   const location = useLocation();
-  if (isAuthenticated()) {
-    return children;
+  if (!Userfront.tokens.accessToken) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
   }
-  return <Navigate to="/login" state={{ from: location }} replace />;
+  return children;
 };
 
 export default ProtectedRoute;

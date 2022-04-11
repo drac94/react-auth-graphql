@@ -1,16 +1,17 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
+// @ts-ignore
+import Userfront from '@userfront/react';
 
 import browserHistory from './browserHistory';
-import { AUTH } from './constants';
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:5000',
+  uri: 'https://api.mysite.com',
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem(AUTH.token);
+  const token = Userfront.tokens.accessToken;
   return {
     headers: {
       ...headers,
