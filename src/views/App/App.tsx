@@ -4,9 +4,10 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 import ProtectedRoute from './ProtectedRoute';
 
+const AdminView = lazy(() => import('../AdminView'));
+const Home = lazy(() => import('../Home'));
 const Login = lazy(() => import('../Login'));
 const NotFound = lazy(() => import('../NotFound'));
-const Home = lazy(() => import('../Home'));
 
 const App = (): JSX.Element => {
   return (
@@ -18,6 +19,14 @@ const App = (): JSX.Element => {
           element={
             <ProtectedRoute>
               <Home />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute allowedRoles={['admin']}>
+              <AdminView />
             </ProtectedRoute>
           }
         />

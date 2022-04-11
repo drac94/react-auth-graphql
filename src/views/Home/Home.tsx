@@ -2,6 +2,7 @@ import React from 'react';
 
 import { useLazyQuery } from '@apollo/client';
 import Userfront from '@userfront/core';
+import { Link } from 'react-router-dom';
 
 import { QUERY } from './Home.query';
 
@@ -38,6 +39,9 @@ const Home = (): JSX.Element => {
         data.getTodos.map((todo) => <span key={todo.id}>{todo.title}</span>)}
       <button onClick={() => getTodos()}>Make API call</button>
       <button onClick={handleOnLogoutClickButton}>Logout</button>
+      {Userfront.user.hasRole?.('admin') && (
+        <Link to="/admin">Go to Admin View</Link>
+      )}
     </div>
   );
 };
