@@ -1,6 +1,4 @@
-# Code Quality Friendly React Template
-
-![toole included](https://user-images.githubusercontent.com/1719915/157990831-0d6ef07f-ea0a-4aa3-a843-eff9e3b794ac.png)
+# React Authentication and Authorization Example
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -10,6 +8,9 @@ This project includes:
 - [ESLint](https://eslint.org/docs/user-guide/getting-started)
 - [Prettier](https://prettier.io/)
 - [Husky](https://github.com/typicode/husky)
+- [React Router](https://reactrouter.com/)
+- [Apollo Client](https://www.apollographql.com/docs/react/)
+- [Userfront](https://userfront.com/)
 
 ## Prerequisites
 
@@ -20,6 +21,11 @@ This project includes:
 - Clone this repo
 - Run `nvm use`
 - Run `npm install`
+
+## Branches
+
+- **main** - Uses custom JWT implementation using a GraphQL API.
+- **feature/userfront** - Uses Userfront service.
 
 ## Available Scripts
 
